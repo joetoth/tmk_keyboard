@@ -7,28 +7,28 @@
 const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Keymap 0: Default Layer
      * ,-----------------------------------------------------------.
-     * |Esc|  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|Backsp |
+     * |~  |  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|Backsp |
      * |-----------------------------------------------------------|
      * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|    \|
      * |-----------------------------------------------------------|
-     * |Caps  |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '|Return  |
+     * |Esc  |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '| Return  |
      * |-----------------------------------------------------------|
      * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|Shift     |
      * |-----------------------------------------------------------|
-     * |Ctrl|Gui |Alt |      Space             |Alt |Gui |App |Ctrl|
+     * |Ctrl|Gui |Alt |      Space             |Alt |Gui |Ctrl|App |
      * `-----------------------------------------------------------'
      */
     [0] = 
     KEYMAP(
         GRV, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, BSPC, BSPC, \
         TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC, RBRC, BSLS, \
-        ESC,A,   S,   D,   FN7,   G,   H,   FN6,   K,   L,   SCLN,QUOT, ENT,  \
-        LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,RSFT,Q, \
-        LGUI,LALT,LCTL,          FN0,                     RCTL,RALT,RGUI, Q),
+        ESC,A,   S,   D,    F,   G,   H,  J,   K,   L,   SCLN,QUOT, ENT,  \
+        LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,RSFT, FN0, \
+        LCTL,LGUI,LALT,          FN0,                     RALT,RGUI,RCTL, APP),
 
     /* Overlay 1: SpaceFN
      * ,-----------------------------------------------------------.
-     * |`  | F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12|Delete |
+     * |     |   |   |   |   |   |   |   |   |   |   |   |   |     |
      * |-----------------------------------------------------------|
      * |     |   |   |   |   |   |   |Hom|Up |End|Psc|Slk|Pau|Ins  |
      * |-----------------------------------------------------------|
@@ -41,11 +41,19 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [1] =
     KEYMAP(
-        GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, DEL, DEL, \
-        TRNS,TRNS,FN4,ESC, TRNS,TRNS,TRNS,HOME,UP,  END, PSCR,SLCK,PAUS,INS,  \
-        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,LEFT,DOWN,UP, RGHT,TRNS,TRNS,     TRNS, \
-        TRNS,TRNS,TRNS,TRNS,TRNS,FN5, PGDN,GRV, FN5, TRNS,TRNS,TRNS,     TRNS, \
+        TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, \
+        TRNS, TRNS, FN4, TRNS, TRNS,TRNS,TRNS,TRNS,TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,  \
+        TRNS, TRNS, TRNS, TRNS,TRNS,TRNS,LEFT,DOWN,UP, RGHT,TRNS,TRNS,     TRNS, \
+        TRNS,TRNS,TRNS,TRNS,TRNS, FN5, TRNS, TRNS, TRNS, TRNS,TRNS,TRNS, TRNS, \
         TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,TRNS),
+
+//    [1] =
+//    KEYMAP(
+//        GRV, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, DEL, DEL, \
+//        TRNS,TRNS,UP,ESC, TRNS,TRNS,TRNS,HOME,UP,  END, PSCR,SLCK,PAUS,INS,  \
+//        TRNS,LEFT,DOWN,RIGHT,TRNS,TRNS,LEFT,DOWN,UP, RGHT,TRNS,TRNS,     TRNS, \
+//        TRNS,TRNS,TRNS,TRNS,TRNS,TRNS, PGDN,GRV, TRNS, TRNS,TRNS,TRNS,     TRNS, \
+//        TRNS,TRNS,TRNS,          TRNS,                    TRNS,TRNS,TRNS,TRNS),
 
     [2] = 
     KEYMAP(
@@ -79,12 +87,12 @@ enum macro_id {
 const uint16_t PROGMEM fn_actions[] = {
     [0] = ACTION_LAYER_TAP_KEY(1, KC_SPACE),
     [1] = ACTION_MODS_KEY(MOD_LSFT, KC_GRV),    // tilde
-    [2] = ACTION_MACRO(MOVE_WORD_FORWARD),                      // Application switching
-    [3] = ACTION_MACRO(MOVE_WORD_BACKWARD),                      // Application switching
-    [4] = ACTION_MODS_KEY(MOD_LCTL, KC_RIGHT),    // tilde
-    [5] = ACTION_MODS_KEY(MOD_RCTL, KC_LEFT),    // tilde
-    [6] = ACTION_LAYER_TAP_KEY(2, KC_J),
-    [7] = ACTION_LAYER_TAP_KEY(3, KC_F),
+    [2] = ACTION_MACRO(MOVE_WORD_FORWARD),                      // NOT USED
+    [3] = ACTION_MACRO(MOVE_WORD_BACKWARD),                      // NOT USED
+    [4] = ACTION_MODS_KEY((MOD_BIT(KC_LCTL) | MOD_BIT(KC_LSHIFT)), KC_RIGHT),    // tilde
+    [5] = ACTION_MODS_KEY((MOD_BIT(KC_LCTL) | MOD_BIT(KC_LSHIFT)), KC_LEFT),    // tilde
+//    [6] = ACTION_LAYER_TAP_KEY(2, KC_J),
+//    [7] = ACTION_LAYER_TAP_KEY(3, KC_F),
 
 };
 
@@ -104,11 +112,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
                     MACRO_NONE );
         case MOVE_WORD_FORWARD:
             return (record->event.pressed ?
-                    MACRO( D(LCTRL), D(RIGHT), END ) :
+                    MACRO( D(LCTRL), D(LSHIFT), D(RIGHT), END ) :
                     MACRO( U(RIGHT), END ));
         case MOVE_WORD_BACKWARD:
             return (record->event.pressed ?
-                    MACRO( D(LCTRL), D(LEFT), END ) :
+                    MACRO( D(LCTRL), D(LSHIFT), D(LEFT), END ) :
                     MACRO( U(LEFT), END ));
     }
     return MACRO_NONE;
